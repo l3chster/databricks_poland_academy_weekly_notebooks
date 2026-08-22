@@ -1,0 +1,10 @@
+command: ["uvicorn", "data_generator:app", "--host", "0.0.0.0", "--port", "8000"]
+env:
+  - name: "CONTAINER_NAME"
+    valueFrom: "container-name"
+  - name: "TENANT_ID"
+    valueFrom: "tenant-id"
+  - name: "CLIENT_ID"
+    valueFrom: "client-id"
+  - name: "CLIENT_SECRET"
+    valueFrom: "client-secret"
