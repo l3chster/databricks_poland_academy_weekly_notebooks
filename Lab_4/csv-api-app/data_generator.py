@@ -34,10 +34,11 @@ async def generate_csv_stream():
     with fsspec.open(source_path, mode="r", **storage_options) as file:
         reader = csv.reader(file)
 
-        header = next(reader)       
-
+        header = next(reader)
+        
         for row in reader:
-            await asyncio.sleep(1)            
+            await asyncio.sleep(1)             
+
             data = dict(zip(header, row))
             yield json.dumps(data) + "\n"
 
