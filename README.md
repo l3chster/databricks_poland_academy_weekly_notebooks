@@ -11,3 +11,4 @@ The project is organized into weekly laboratory directories. Each folder contain
 *   **`Lab_1/`** – Databricks Fundamentals & DEV Setup (Week 1) 
 *   **`Lab_2/`** – Azure Services & Shared Lakehouse Setup (Week 2)
 *   **`Lab_3/`** – Streaming & Incremental Ingestion (Week 3)
+*   **`Lab_4/`** – Silver Layer, Data Quality & Schema Evolution (Week 4)
