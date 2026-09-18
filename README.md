@@ -12,3 +12,4 @@ The project is organized into weekly laboratory directories. Each folder contain
 *   **`Lab_2/`** – Azure Services & Shared Lakehouse Setup (Week 2)
 *   **`Lab_3/`** – Streaming & Incremental Ingestion (Week 3)
 *   **`Lab_4/`** – Silver Layer, Data Quality & Schema Evolution (Week 4)
+*   **`Lab_5/`** – Declarative Pipelines / Lakeflow (Week 5)
