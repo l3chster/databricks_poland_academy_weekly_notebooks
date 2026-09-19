@@ -1,14 +1,11 @@
 from pyspark import pipelines as dp
-import pyspark.sql.types as T
-from pyspark.sql.functions import current_timestamp, col, expr
+from pyspark.sql.functions import col, current_timestamp, expr
 from pyspark.sql.types import (
-    BooleanType,
     DoubleType,
     IntegerType,
     StringType,
     StructField,
     StructType,
-    TimestampType,
 )
 
 catalog_name = spark.conf.get("crime.ingestion.catalog_name")

@@ -1,15 +1,9 @@
 from pyspark import pipelines as dp
-from pyspark.sql.functions import current_timestamp, col, when, lower, initcap, lit, coalesce, to_timestamp
+from pyspark.sql.functions import coalesce, col, current_timestamp, initcap, lit, lower, to_timestamp, when
 from pyspark.sql.types import (
-    BooleanType,
     DoubleType,
     IntegerType,
-    StringType,
-    StructField,
-    StructType,
-    TimestampType,
 )
-
 
 catalog_name = spark.conf.get("crime.ingestion.catalog_name")
 

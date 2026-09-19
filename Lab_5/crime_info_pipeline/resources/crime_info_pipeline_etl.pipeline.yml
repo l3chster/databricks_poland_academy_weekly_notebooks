@@ -1,0 +1,18 @@
+# The main pipeline for crime_info_pipeline
+
+resources:
+  pipelines:
+    crime_info_pipeline_etl:
+      name: crime_info_pipeline_etl
+      catalog: ${var.catalog}
+      schema: ${var.schema}
+      serverless: true 
+
+      configuration:
+        crime.ingestion.catalog_name: ${var.catalog}     
+
+      libraries:
+        - glob:
+            include: ../src/etl_crime_pipeline/**
+
+

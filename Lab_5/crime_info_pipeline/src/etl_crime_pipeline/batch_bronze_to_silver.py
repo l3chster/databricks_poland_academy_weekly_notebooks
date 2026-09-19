@@ -1,6 +1,5 @@
 from pyspark import pipelines as dp
-from pyspark.sql.functions import current_timestamp, col, lit
-
+from pyspark.sql.functions import current_timestamp
 
 catalog_name = spark.conf.get("crime.ingestion.catalog_name")
 

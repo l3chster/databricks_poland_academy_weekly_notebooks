@@ -1,16 +1,10 @@
 from pyspark import pipelines as dp
-import pyspark.sql.types as T
-from pyspark.sql.functions import current_timestamp, col, expr
+from pyspark.sql.functions import col, current_timestamp, expr
 from pyspark.sql.types import (
-    BooleanType,
-    DoubleType,
-    IntegerType,
     StringType,
     StructField,
     StructType,
-    TimestampType,
 )
-
 
 catalog_name = spark.conf.get("crime.ingestion.catalog_name")
 STORAGE_PATH = f"/Volumes/{catalog_name}/crime_bronze/streaming"
@@ -28,8 +22,8 @@ crime_schema = StructType([
     StructField("city", StringType(), True),                
     StructField("state", StringType(), True),               
     StructField("address", StringType(), True),            
-    StructField("latitude", StringType(), True),   #         
-    StructField("longitude", StringType(), True),   #        
+    StructField("latitude", StringType(), True),
+    StructField("longitude", StringType(), True),
     StructField("incident_datetime", StringType(), True),   
     StructField("officer_id", StringType(), True),          
     StructField("officer_first_name", StringType(), True), 
@@ -38,21 +32,21 @@ crime_schema = StructType([
     StructField("suspect_id", StringType(), True),          
     StructField("suspect_first_name", StringType(), True),  
     StructField("suspect_last_name", StringType(), True),   
-    StructField("suspect_age", StringType(), True), #       
+    StructField("suspect_age", StringType(), True),
     StructField("suspect_gender", StringType(), True),      
     StructField("suspect_race", StringType(), True),        
     StructField("victim_id", StringType(), True),           
     StructField("victim_first_name", StringType(), True),   
     StructField("victim_last_name", StringType(), True),    
-    StructField("victim_age", StringType(), True),   #      
+    StructField("victim_age", StringType(), True),
     StructField("victim_gender", StringType(), True),       
     StructField("victim_phone", StringType(), True),        
     StructField("weapon_used", StringType(), True),        
     StructField("severity", StringType(), True),            
     StructField("case_status", StringType(), True),         
     StructField("resolution", StringType(), True),          
-    StructField("num_arrests", StringType(), True),      #  
-    StructField("property_loss_usd", StringType(), True),   #
+    StructField("num_arrests", StringType(), True),
+    StructField("property_loss_usd", StringType(), True),
     StructField("reported_online", StringType(), True),        
     StructField("notes", StringType(), True)                       
 ])

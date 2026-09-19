@@ -1,0 +1,31 @@
+bundle:
+  name: crime_info_pipeline
+  uuid: eb046056-5f71-4d0c-9b04-22e7fba5a6e5
+
+include:
+  - resources/*.yml
+
+variables:
+  catalog:
+    description: The catalog to use
+  schema:
+    description: The schema to use
+
+targets:
+  dev:
+    mode: development
+    default: true
+    workspace:
+      host: https://dbc-3b714993-952c.cloud.databricks.com
+    variables:
+      catalog: workspace
+      schema: crime_bronze
+
+  prod:
+    mode: production
+    workspace:
+      host: https://adb-7405604503619901.1.azuredatabricks.net
+    variables:
+      catalog: dbr_dev
+      schema: crime_bronze
+  
