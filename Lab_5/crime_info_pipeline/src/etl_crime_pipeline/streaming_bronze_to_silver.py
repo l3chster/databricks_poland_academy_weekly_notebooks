@@ -1,5 +1,5 @@
 from pyspark import pipelines as dp
-from pyspark.sql.functions import coalesce, col, current_timestamp, initcap, lit, lower, to_timestamp, when
+from pyspark.sql.functions import coalesce, col, current_timestamp, initcap, lit, lower, when, try_to_timestamp, expr
 from pyspark.sql.types import (
     DoubleType,
     IntegerType,
@@ -82,21 +82,21 @@ def crime_silver_clean():
            .withColumn("suspect_last_name", initcap(col("suspect_last_name")))
 
            # CAST TYPES
-           .withColumn("suspect_age", col("suspect_age").cast(DoubleType()).cast(IntegerType()))
-           .withColumn("victim_age", col("victim_age").cast(DoubleType()).cast(IntegerType()))
-           .withColumn("num_arrests", col("num_arrests").cast(DoubleType()).cast(IntegerType()))
-           .withColumn("property_loss_usd", col("property_loss_usd").cast(DoubleType()))           
+           .withColumn("suspect_age", expr("TRY_CAST(suspect_age AS DOUBLE)").cast(IntegerType()))
+           .withColumn("victim_age", expr("TRY_CAST(victim_age AS DOUBLE)").cast(IntegerType()))
+           .withColumn("num_arrests", expr("TRY_CAST(num_arrests AS DOUBLE)").cast(IntegerType()))
+           .withColumn("property_loss_usd", expr("TRY_CAST(property_loss_usd AS DOUBLE)"))           
            .withColumn(
                 "incident_datetime", 
                 coalesce(
-                to_timestamp(col("incident_datetime"), "yyyy-MM-dd HH:mm:ss"),
-                to_timestamp(col("incident_datetime"), "dd/MM/yyyy HH:mm"),
-                to_timestamp(col("incident_datetime"), "dd/MM/yyyy HH:mm:ss"),
-                to_timestamp(col("incident_datetime"), "MM/dd/yyyy HH:mm:ss"),       
-                to_timestamp(col("incident_datetime"), "dd-MM-yyyy"),
-                to_timestamp(col("incident_datetime"), "yyyy-MM-dd"),
-                to_timestamp(col("incident_datetime"), "dd/MM/yyyy"),
-                to_timestamp(col("incident_datetime"), "MM/dd/yyyy")
+                try_to_timestamp(col("incident_datetime"), lit("yyyy-MM-dd HH:mm:ss")),
+                try_to_timestamp(col("incident_datetime"), lit("dd/MM/yyyy HH:mm")),
+                try_to_timestamp(col("incident_datetime"), lit("dd/MM/yyyy HH:mm:ss")),
+                try_to_timestamp(col("incident_datetime"), lit("MM/dd/yyyy HH:mm:ss")),       
+                try_to_timestamp(col("incident_datetime"), lit("dd-MM-yyyy")),
+                try_to_timestamp(col("incident_datetime"), lit("yyyy-MM-dd")),
+                try_to_timestamp(col("incident_datetime"), lit("dd/MM/yyyy")),
+                try_to_timestamp(col("incident_datetime"), lit("MM/dd/yyyy"))
             )
             )
                       
